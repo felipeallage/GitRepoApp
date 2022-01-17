@@ -10,9 +10,10 @@ import Foundation
 
 class UserInfoContainer: Codable {
     
-    var total_count: Int
-    var incomplete_results: Bool
-    var items: [Repository]
+    var total_count: Int?
+    var incomplete_results: Bool?
+    var items: [Repository?]
     
 }
+
 

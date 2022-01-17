@@ -84,6 +84,12 @@
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="repoAuthorLabel" destination="Ujx-QP-h7E" id="uhZ-LD-A6Z"/>
+                <outlet property="repoImageView" destination="g9v-7h-F5D" id="gpu-pj-XHD"/>
+                <outlet property="repoNameLabel" destination="eMl-Sl-0NU" id="aHj-86-eiT"/>
+                <outlet property="starCountLabel" destination="zCa-TT-Bdx" id="IcC-Ry-vnT"/>
+            </connections>
             <point key="canvasLocation" x="153.62318840579712" y="113.83928571428571"/>
         </tableViewCell>
     </objects>

@@ -14,8 +14,7 @@ class RepoTableViewCell: UITableViewCell {
     @IBOutlet weak var repoNameLabel: UILabel!
     
     @IBOutlet weak var repoImageView: UIImageView!
-    
-    
+
     @IBOutlet weak var starCountLabel: UILabel!
     
     override func awakeFromNib() {

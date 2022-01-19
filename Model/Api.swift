@@ -18,7 +18,7 @@ struct RepositoryApi {
     var delegate: RepositoryApiDelegate?
     
     func getRepository() {
-        let link = "https://api.github.com/search/repositories?q=language&=swift&sort=stars"
+        let link = Constants.repoLink
         guard let url = URL(string: link) else {
             return
         }

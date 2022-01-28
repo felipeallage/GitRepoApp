@@ -9,6 +9,11 @@ import UIKit
 import Kingfisher
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, RepositoryApiDelegate {
+    func didGetRepository(repository: UserInfoContainer) {
+        self.repositoryResults = repository
+        repositoryTableView.reloadData()
+    }
+    
     
     @IBOutlet weak var repositoryTableView: UITableView!
     
@@ -34,27 +39,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: NewTableViewCell.identifier) as! NewTableViewCell
         if let repo = repositoryResults, let items = repo.items  {
             let repository = items[indexPath.row]
-            cell.repoNameLabel.text = repository.name
-            cell.repoAuthorLabel.text = repository.full_name
-            if let starcount = repository.stargazers_count {
-                cell.starCountLabel.text = String(format: "\u{2b50}\(starcount)K")
-            }
-
-            if let owner = repository.owner, let imagePath = owner.avatar_url {
-                cell.repoImageView.kf.setImage(with: URL(string: imagePath))
-            }
+            cell.update(model: repository)
         }
         return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
-    }
-    
-    
-    func didGetRepository(repository: UserInfoContainer) {
-        self.repositoryResults = repository
-        repositoryTableView.reloadData()
     }
     
 

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class NewTableViewCell: UITableViewCell {
     
@@ -30,7 +31,6 @@ class NewTableViewCell: UITableViewCell {
     
     lazy var repoAuthorLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 17)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
@@ -47,7 +47,7 @@ class NewTableViewCell: UITableViewCell {
     }()
     
     lazy var labelStack: UIStackView = {
-       let stack = UIStackView(arrangedSubviews: [repoAuthorLabel, starCountLabel])
+        let stack = UIStackView(arrangedSubviews: [repoAuthorLabel, starCountLabel])
         stack.axis = .horizontal
         stack.alignment = .fill
         stack.distribution = .fill
@@ -57,7 +57,7 @@ class NewTableViewCell: UITableViewCell {
     }()
     
     lazy var vStack: UIStackView = {
-       let imageStack = UIStackView(arrangedSubviews: [repoNameLabel, labelStack])
+        let imageStack = UIStackView(arrangedSubviews: [repoNameLabel, labelStack])
         imageStack.axis = .vertical
         imageStack.alignment = .leading
         imageStack.distribution = .fill
@@ -66,26 +66,26 @@ class NewTableViewCell: UITableViewCell {
         return imageStack
     }()
     
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(repoImageView)
         self.contentView.addSubview(vStack)
         repoImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-                repoImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 10).isActive = true
+        repoImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 10).isActive = true
         repoImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-                repoImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
-
-                vStack.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
-
-                vStack.leadingAnchor.constraint(
-                    equalTo: self.repoImageView.trailingAnchor,
-                    constant: 10).isActive = true
-
-                self.contentView.trailingAnchor.constraint(
-                    equalTo: self.vStack.trailingAnchor,
-                    constant: 10
-                ).isActive = true
+        repoImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+        
+        vStack.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+        
+        vStack.leadingAnchor.constraint(
+            equalTo: self.repoImageView.trailingAnchor,
+            constant: 10).isActive = true
+        
+        self.contentView.trailingAnchor.constraint(
+            equalTo: self.vStack.trailingAnchor,
+            constant: 10
+        ).isActive = true
         
         
     }
@@ -96,7 +96,20 @@ class NewTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-
+        
     }
-
+    
+    func update(model: Repository) {
+        repoNameLabel.text = model.name
+        repoAuthorLabel.text = model.full_name
+        if let starcount = model.stargazers_count {
+            starCountLabel.text = String(format: "\u{2b50}\(starcount)K")
+        }
+        if let owner = model.owner, let imagePath = owner.avatar_url {
+            repoImageView.kf.setImage(with: URL(string: imagePath))
+        }
+        
+    }
+    
 }
+

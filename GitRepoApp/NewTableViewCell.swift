@@ -11,22 +11,82 @@ class NewTableViewCell: UITableViewCell {
     
     static let identifier = "NewTableViewCell"
     
-    let repoImageView = UIImageView()
+    lazy var repoImageView: UIImageView = {
+        let img = UIImageView()
+        img.contentMode = .scaleAspectFill
+        img.translatesAutoresizingMaskIntoConstraints = false
+        img.layer.cornerRadius = 35
+        img.clipsToBounds = true
+        return img
+    }()
     
-    let repoNameLabel = UILabel()
+    lazy var repoNameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.textColor = .green
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
-    let repoAuthorLabel = UILabel()
+    lazy var repoAuthorLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.textColor = .black
+        label.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        return label
+    }()
     
-    let starCountLabel = UILabel()
+    lazy var starCountLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 17)
+        label.textColor = .black
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.setContentCompressionResistancePriority(.defaultHigh, for: .horizontal)
+        return label
+    }()
+    
+    lazy var labelStack: UIStackView = {
+       let stack = UIStackView(arrangedSubviews: [repoAuthorLabel, starCountLabel])
+        stack.axis = .horizontal
+        stack.alignment = .fill
+        stack.distribution = .fill
+        stack.spacing = 10
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        return stack
+    }()
+    
+    lazy var vStack: UIStackView = {
+       let imageStack = UIStackView(arrangedSubviews: [repoNameLabel, labelStack])
+        imageStack.axis = .vertical
+        imageStack.alignment = .leading
+        imageStack.distribution = .fill
+        imageStack.spacing = 10
+        imageStack.translatesAutoresizingMaskIntoConstraints = false
+        return imageStack
+    }()
+    
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubview(repoImageView)
-        contentView.addSubview(repoNameLabel)
-        contentView.addSubview(repoAuthorLabel)
-        contentView.addSubview(starCountLabel)
-        repoAuthorLabel.font = .systemFont(ofSize: 17, weight: .bold)
-        repoAuthorLabel.textColor = .green
+        self.contentView.addSubview(repoImageView)
+        self.contentView.addSubview(vStack)
+        repoImageView.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+                repoImageView.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor,constant: 10).isActive = true
+        repoImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
+                repoImageView.heightAnchor.constraint(equalToConstant: 70).isActive = true
+
+                vStack.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor).isActive = true
+
+                vStack.leadingAnchor.constraint(
+                    equalTo: self.repoImageView.trailingAnchor,
+                    constant: 10).isActive = true
+
+                self.contentView.trailingAnchor.constraint(
+                    equalTo: self.vStack.trailingAnchor,
+                    constant: 10
+                ).isActive = true
+        
         
     }
     
@@ -36,10 +96,7 @@ class NewTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        repoImageView.frame = CGRect(x: 5, y: 5, width: 70, height: contentView.frame.size.height-10)
-        repoNameLabel.frame = CGRect(x: 10+repoImageView.frame.size.width, y: 0, width: contentView.frame.size.width - 10 - repoImageView.frame.size.width, height: 30)
-        repoAuthorLabel.frame = CGRect(x: 10+repoImageView.frame.size.width, y: 10+repoNameLabel.frame.size.height, width: contentView.frame.size.width - 10 - repoImageView.frame.size.width-100, height: 30)
-        starCountLabel.frame = CGRect(x: 10+repoImageView.frame.size.width+repoAuthorLabel.frame.width, y: 10+repoNameLabel.frame.size.height, width: contentView.frame.size.width - 10 - repoImageView.frame.size.width - repoAuthorLabel.frame.size.width, height: 30)
+
     }
 
 }

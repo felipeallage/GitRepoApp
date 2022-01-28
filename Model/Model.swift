@@ -12,7 +12,7 @@ class UserInfoContainer: Codable {
     
     var total_count: Int?
     var incomplete_results: Bool?
-    var items: [Repository?]
+    var items: [Repository]?
     
 }
 

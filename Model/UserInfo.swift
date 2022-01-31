@@ -9,12 +9,7 @@ import Foundation
 
 class UserInfo: Codable {
     
-    var id: Int?
-    var node_id: String?
-    var name: String?
-    var full_name: String?
-    var Private : Bool?
-    var owner: Owner?	
+    
     
 }
 

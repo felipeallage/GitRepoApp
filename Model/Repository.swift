@@ -9,7 +9,12 @@ import Foundation
 
 class Repository: Codable {
     
-    var user: UserInfo?
+    var id: Int?
+    var node_id: String?
+    var name: String?
+    var full_name: String?
+    var Private : Bool?
+    var owner: Owner?
     var html_url: String?
     var description: String?
     var fork: Bool?

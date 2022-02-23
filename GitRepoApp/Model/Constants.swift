@@ -11,4 +11,8 @@ struct Constants {
     
     static let repoLink = "https://api.github.com/search/repositories?q=language&=swift&sort=stars"
     
+    static let baseLink = "https://api.github.com/search/repositories?q=language&sort=stars&page="
+    
+    
+    
 }

@@ -27,5 +27,7 @@ class Owner: Codable {
     var received_events_url: String?
     var type: String?
     var site_admin: Bool?
+    var name: String?
+    var bio: String?
     
 }
